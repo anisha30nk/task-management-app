@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - TaskFlow</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+    linear-gradient(rgba(0,0,0,0.82), rgba(0,0,0,0.82)),
+    url('hero.jpg');
+    background-size:cover;
+    background-position:center;
+}
+
+.login-container{
+    width:900px;
+    max-width:95%;
+    display:flex;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 10px 35px rgba(0,0,0,0.3);
+}
+
+.left{
+    flex:1;
+    background:linear-gradient(135deg,#fff8dc,#fff3b0);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+.left h1{
+    color:#7a6500;
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+.left p{
+    color:#5f5400;
+    text-align:center;
+    line-height:1.8;
+}
+
+.right{
+    flex:1;
+    padding:50px 40px;
+}
+
+.right h2{
+    text-align:center;
+    margin-bottom:30px;
+    color:#333;
+}
+
+.input-group{
+    margin-bottom:20px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    color:#444;
+    font-weight:500;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    outline:none;
+    font-size:15px;
+}
+
+.input-group input:focus{
+    border-color:#ffd54f;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    background:#f4c430;
+    color:#333;
+    border:none;
+    border-radius:10px;
+    font-size:17px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#e6b800;
+}
+
+.error{
+    color:red;
+    font-size:14px;
+    margin-top:5px;
+}
+
+.bottom-text{
+    margin-top:20px;
+    text-align:center;
+}
+
+.bottom-text a{
+    color:#c28b00;
+    text-decoration:none;
+    font-weight:600;
+}
+
+@media(max-width:768px){
+    .login-container{
+        flex-direction:column;
+    }
+
+    .left{
+        padding:30px;
+    }
+
+    .left h1{
+        font-size:32px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="login-container">
+
+    <div class="left">
+        <h1>TaskFlow</h1>
+        <p>
+            Organize your tasks, improve productivity,
+            and achieve goals faster with TaskFlow.
+        </p>
+    </div>
+
+    <div class="right">
+        <h2>Welcome Back</h2>
+
+        <form id="loginForm">
+
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="Enter your email">
+                <div class="error" id="emailError"></div>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+                <div class="error" id="passwordError"></div>
+            </div>
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <div class="bottom-text">
+            Don't have an account?
+            <a href="register.html">Register</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    let emailError = document.getElementById("emailError");
+    let passwordError = document.getElementById("passwordError");
+
+    emailError.innerHTML = "";
+    passwordError.innerHTML = "";
+
+    let isValid = true;
+
+    let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+    if(email === ""){
+        emailError.innerHTML = "Email is required";
+        isValid = false;
+    }
+    else if(!email.match(emailPattern)){
+        emailError.innerHTML = "Enter valid email";
+        isValid = false;
+    }
+
+    if(password === ""){
+        passwordError.innerHTML = "Password is required";
+        isValid = false;
+    }
+    else if(password.length < 6){
+        passwordError.innerHTML = "Minimum 6 characters";
+        isValid = false;
+    }
+
+    if(isValid){
+        alert("Login successful!");
+        window.location.href = "dashboard.html";
+    }
+});
+</script>
+
+</body>
+</html>
